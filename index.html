@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Anushkaa | Valentine 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* --- RED, PINK & WHITE THEME --- */
+        body {
+            font-family: 'Lato', sans-serif;
+            /* Romantic Red/Pink Gradient */
+            background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #881337; /* Rose-900 for text */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .script-font { font-family: 'Dancing Script', cursive; }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- GLASSMORPHISM (White Tint) --- */
+        .glass {
+            background: rgba(255, 255, 255, 0.6); /* More white/opaque */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(255, 20, 147, 0.15); /* Pink shadow */
+            border-radius: 20px;
+        }
+
+        /* --- TERMINAL --- */
+        #terminal {
+            position: fixed; inset: 0; background: #000; z-index: 100;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Share Tech Mono', monospace; color: #ff0055;
+        }
+
+        /* --- FLIP CARDS --- */
+        .flip-card { perspective: 1000px; height: 320px; cursor: pointer; }
+        .flip-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.8s; transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+        .flip-front, .flip-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; display: flex;
+            align-items: center; justify-content: center; flex-direction: column;
+            border-radius: 16px; padding: 24px;
+        }
+        .flip-front { background: rgba(255,255,255,0.8); border: 2px solid #fda4af; }
+        .flip-back { background: #be123c; color: #fff; transform: rotateY(180deg); border: 2px solid #fff; }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-option { transition: all 0.3s ease; cursor: pointer; }
+        .quiz-option:hover { transform: scale(1.05); background-color: #ffe4e6; }
+
+        /* --- MASONRY GRID --- */
+        .masonry-grid { column-count: 2; column-gap: 1rem; }
+        @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; border-radius: 1rem; overflow: hidden; transition: transform 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .masonry-item:hover { transform: scale(1.02); }
+
+        /* --- RUNAWAY BUTTON --- */
+        #no-btn { position: relative; transition: all 0.1s ease; }
+        
+        /* --- VENDING MACHINE --- */
+        .lcd-screen { background: #000; color: #ff0055; font-family: 'Share Tech Mono', monospace; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mp3">
+    </audio>
+    <div class="fixed bottom-5 left-5 z-50 w-12 h-12 rounded-full bg-white flex items-center justify-center cursor-pointer hover:scale-110 transition shadow-lg border-2 border-rose-500" onclick="toggleMusic()">
+        <i id="music-icon" class="fas fa-play text-rose-600"></i>
+    </div>
+
+    <div id="terminal">
+        <div class="max-w-2xl p-8 w-full">
+            <div id="terminal-content" class="text-lg md:text-xl leading-relaxed text-pink-500"></div>
+            <button id="enter-btn" onclick="enterSite()" class="hidden mt-6 border border-pink-500 text-pink-500 px-6 py-2 hover:bg-pink-600 hover:text-white transition uppercase tracking-widest font-bold">
+                >> Access_Heart.exe
+            </button>
+        </div>
+    </div>
+
+    <div id="main-site" class="hidden opacity-0 transition-opacity duration-1000">
+
+        <section class="min-h-screen flex flex-col items-center justify-center text-center p-4">
+            <div class="glass p-12 max-w-4xl transform hover:scale-105 transition duration-500 relative bg-white/50">
+                <div class="w-60 h-60 mx-auto rounded-full border-8 border-rose-200 shadow-2xl mb-8 overflow-hidden">
+                    <img src=src="main-photo.jpg" alt="Anushkaa" class="w-full h-full object-cover">
+                </div>
+                <h1 class="script-font text-7xl md:text-9xl mb-4 text-rose-600 drop-shadow-sm">Anushkaa</h1>
+                <p class="text-2xl md:text-3xl font-light italic text-rose-800">"In a world of variables, you are my only constant."</p>
+            </div>
+            <div class="mt-12 animate-bounce text-rose-600">
+                <i class="fas fa-chevron-down text-4xl drop-shadow-md"></i>
+            </div>
+        </section>
+
+        <section class="py-20 container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-12 text-rose-700 font-serif">Our Beautiful Memories</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+                
+                <div class="row-span-2 relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory1.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                </div>
+
+                <div class="col-span-2 relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory2.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory3.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory4.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="row-span-2 relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory5.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory6.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+                 <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+                    <img src="images/memory7.jpg" alt="Memory" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                </div>
+
+            </div>
+        </section>
+        <section class="py-20 container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 text-rose-700">Our Journey</h2>
+            <div class="max-w-3xl mx-auto relative border-l-4 border-rose-300 pl-8 space-y-10">
+                <div class="glass p-8 relative transform transition hover:scale-105 bg-white">
+                    <span class="absolute -left-12 top-8 w-8 h-8 bg-rose-500 rounded-full border-4 border-white"></span>
+                    <h3 class="text-2xl font-bold mb-2 text-rose-600">The Beginning</h3>
+                    <p class="text-gray-600">"The moment our paths crossed, I didn't know what big changes were coming to my life with, Hey, let's catch up at Chaayos."</p>
+                </div>
+                <div class="glass p-8 relative transform transition hover:scale-105 bg-white">
+                    <span class="absolute -left-12 top-8 w-8 h-8 bg-rose-500 rounded-full border-4 border-white"></span>
+                    <h3 class="text-2xl font-bold mb-2 text-rose-600">The Spark</h3>
+                    <p class="text-gray-600">"Getting to know you, prom, dates, roaming here and there at campus, beach, canteens, hostel 17, watching movies together, little bit of shying with each other, Elephanta, Arya Bhavan, Ikea, etc, etc it wasn't just falling in love; it was finding a missing piece."</p>
+                </div>
+                <div class="glass p-8 relative transform transition hover:scale-105 bg-white">
+                    <span class="absolute -left-12 top-8 w-8 h-8 bg-rose-500 rounded-full border-4 border-white"></span>
+                    <h3 class="text-2xl font-bold mb-2 text-rose-600">Distance</h3>
+                    <p class="text-gray-600">"Kilometers apart, yet you are the first thing on my mind every morning. Spending days wwith you in Lonavala and then in Mumbai, it was like best time of my year, I fell in love with you all over again"</p>
+                </div>
+                <div class="glass p-8 relative transform transition hover:scale-105 bg-white">
+                    <span class="absolute -left-12 top-8 w-8 h-8 bg-rose-500 rounded-full border-4 border-white"></span>
+                    <h3 class="text-2xl font-bold mb-2 text-rose-600">The Support</h3>
+                    <p class="text-gray-600">"Through the chaos of prep, you became my calm. My safe place, my constant motivation."</p>
+                </div>
+                <div class="glass p-8 relative transform transition hover:scale-105 border-l-8 border-rose-500 bg-white">
+                    <span class="absolute -left-12 top-8 w-8 h-8 bg-red-600 rounded-full border-4 border-white animate-pulse"></span>
+                    <h3 class="text-2xl font-bold mb-2 text-rose-600">Right Now</h3>
+                    <p class="text-gray-600">"Me, sitting here, creating this code just to make you smile, love youuu"</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 container mx-auto px-4">
+            <div class="glass max-w-4xl mx-auto p-10 border-t-8 border-rose-500 bg-white/70">
+                <h2 class="text-4xl font-bold text-center mb-2 text-rose-800">Emotional Vending Machine</h2>
+                <p class="text-center mb-8 text-rose-500">Select what you need, my love.</p>
+                <div class="lcd-screen p-6 rounded-lg mb-8 text-center min-h-[100px] flex items-center justify-center text-xl border-4 border-gray-800 shadow-inner">
+                    <span id="vending-display">STATUS: READY TO LOVE</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <button onclick="dispense('hug')" class="bg-rose-500 hover:bg-rose-600 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Big Hug</button>
+                    <button onclick="dispense('joke')" class="bg-pink-400 hover:bg-pink-500 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Smile</button>
+                    <button onclick="dispense('fact')" class="bg-red-400 hover:bg-red-500 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Truth</button>
+                    <button onclick="dispense('comp')" class="bg-rose-400 hover:bg-rose-500 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Compliment</button>
+                    <button onclick="dispense('future')" class="bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Future</button>
+                    <button onclick="dispense('love')" class="bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Love Note</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 container mx-auto px-4">
+            <div class="glass max-w-5xl mx-auto p-10 relative overflow-hidden bg-white/60">
+                <h2 class="text-4xl font-bold text-center mb-12 text-rose-800">Bridging The Gap</h2>
+                <div class="flex justify-between items-center text-xl font-bold relative z-10 px-4 md:px-32 text-rose-900">
+                    <div class="text-center group">
+                        <div class="w-6 h-6 bg-red-600 rounded-full mx-auto mb-2 animate-ping"></div>
+                        <i class="fas fa-map-marker-alt text-red-600 text-4xl group-hover:scale-125 transition"></i>
+                        <p class="mt-2 font-serif">Jabalpur</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-6 h-6 bg-pink-600 rounded-full mx-auto mb-2 animate-ping"></div>
+                        <i class="fas fa-map-marker-alt text-pink-600 text-4xl group-hover:scale-125 transition"></i>
+                        <p class="mt-2 font-serif">You</p>
+                    </div>
+                </div>
+                <div class="relative w-full h-1 bg-rose-200 mt-10 rounded-full">
+                    <div id="plane-icon" class="absolute -top-4 left-0 text-3xl drop-shadow-lg">✈️</div>
+                </div>
+                <div class="text-center mt-12">
+                    <button onclick="bridgeGap()" class="bg-rose-600 text-white px-10 py-3 rounded-full font-bold shadow-xl hover:bg-rose-700 transition transform hover:scale-105 border-2 border-white">
+                        Connect Hearts <i class="fas fa-wifi ml-2"></i>
+                    </button>
+                    <p id="bridge-status" class="mt-4 font-mono text-lg opacity-0 transition text-rose-600">Status: Disconnected</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 text-rose-800">Why I Love You</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-user-friends text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">My Dear Friend</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"You are not just my love, but my very dear friend, one who hears the words I don't even need to say." 👯‍♀️</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-camera-retro text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">The View</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"Looking at our photos makes me smile. Even a static image of you holds enough power to brighten my darkest days." ✨</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-rocket text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">My Motivation</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"You support me, your belief in me gives me a lot of motivation. Your voice is my favorite sound." 🚀</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-music text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">Simply Perfect</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"You are the calm in my chaos, the melody in my noise, you are simply Perfect." 🎶</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-heart text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">My Flower</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"You are a very great girlfriend Anushkaa, the only flower I ever need." ❤️</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <i class="fas fa-map-signs text-6xl text-rose-500 mb-4"></i>
+                            <h3 class="text-2xl font-bold text-rose-800">Distance</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p class="text-lg font-serif italic">"Distance means nothing when I have you." ❤️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="py-20 container mx-auto px-4">
+            <div class="glass max-w-2xl mx-auto p-10 text-center border-4 border-white">
+                <h2 class="text-4xl font-bold mb-8 text-rose-700 script-font">One Last Thing...</h2>
+                <div id="quiz-container">
+                    <div id="q1" class="quiz-step">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Who is the prettiest girl in my world?</h3>
+                        <div class="flex gap-4 justify-center">
+                            <button onclick="nextQuestion(1)" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">Anushkaa</button>
+                            <button onclick="nextQuestion(1)" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">Samay's girlfriend</button>
+                        </div>
+                    </div>
+                    <div id="q2" class="quiz-step hidden">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">How much do I love you?</h3>
+                        <div class="flex gap-4 justify-center">
+                            <button onclick="alert('Try again! It\'s more than that! 😉')" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">A lot</button>
+                            <button onclick="nextQuestion(2)" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">Infinity ❤️</button>
+                        </div>
+                    </div>
+                    <div id="q3" class="quiz-step hidden">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Where does my heart belong?</h3>
+                        <div class="flex gap-4 justify-center">
+                            <button onclick="finishQuiz()" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">With You</button>
+                            <button onclick="finishQuiz()" class="quiz-option bg-white border-2 border-rose-300 px-6 py-3 rounded-full text-rose-600 font-bold hover:bg-rose-100">Anushkaa's pocket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="final-footer" class="py-24 text-center relative overflow-hidden hidden">
+            <div id="final-question">
+                <h2 class="script-font text-6xl mb-10 text-rose-600 drop-shadow-md">Will you be my Valentine?</h2>
+                <div class="relative w-full max-w-lg mx-auto h-40 flex justify-center items-center gap-10">
+                    <button onclick="acceptLove()" class="bg-rose-600 text-white px-16 py-5 rounded-full font-bold shadow-2xl hover:scale-110 transition z-20 text-2xl border-4 border-white">
+                        YES ❤️
+                    </button>
+                    <button id="no-btn" onmouseover="dodge()" class="bg-gray-800 text-gray-400 px-16 py-5 rounded-full font-bold shadow-xl cursor-not-allowed z-10 text-2xl border-4 border-gray-600 transition-all duration-100 ease-out">
+                        NO
+                    </button>
+                </div>
+            </div>
+
+            <div id="secret-letter" class="hidden opacity-0 transition-opacity duration-2000 max-w-3xl mx-auto p-10 glass mt-10 text-left border-t-8 border-rose-600 bg-white/90">
+                <h2 class="text-4xl font-bold mb-6 text-rose-800 font-serif">To My Valentine, My Dearest Anushkaa,</h2>
+                <div class="text-xl leading-relaxed text-gray-800 font-serif space-y-4">
+                    <p>Happy Valentine's Day. 🌹</p>
+                    <p>I hate that I can’t take you out for a dinner date tonight or hold your hand, but I want you to know that you are celebrated today and every day. Distance is just a temporary test, and I know we are going to pass it with flying colors.</p>
+                    <p>Save this date for me, because when we meet, we are celebrating everything we missed.</p>
+                    <p class="font-bold text-2xl mt-4 text-rose-600">I love you!! ❤️</p>
+                </div>
+            </div>
+
+            <p class="mt-16 text-sm text-gray-600 font-mono opacity-70">Engineered with ❤️ in C++ & HTML by Samay with help of gemini</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // TERMINAL
+        const terminalText = [
+            "> Initializing Valentine_Protocol...",
+            "> Searching for User: Anushkaaaaa...",
+            "> Match Found: 100%",
+            "> Status: Missing You, in critical state.",
+            "> Access Granted."
+        ];
+        
+        let line = 0, char = 0;
+        const textDiv = document.getElementById('terminal-content');
+        
+        function typeTerminal() {
+            if (line < terminalText.length) {
+                if (char < terminalText[line].length) {
+                    textDiv.innerHTML += terminalText[line].charAt(char);
+                    char++;
+                    setTimeout(typeTerminal, 30);
+                } else {
+                    textDiv.innerHTML += "<br>";
+                    line++;
+                    char = 0;
+                    setTimeout(typeTerminal, 300);
+                }
+            } else {
+                document.getElementById('enter-btn').classList.remove('hidden');
+            }
+        }
+        window.onload = typeTerminal;
+
+        function enterSite() {
+            document.getElementById('terminal').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('terminal').style.display = 'none';
+                const main = document.getElementById('main-site');
+                main.classList.remove('hidden');
+                setTimeout(() => main.style.opacity = '1', 100);
+            }, 1000);
+        }
+
+        // QUIZ LOGIC
+        function nextQuestion(qNumber) {
+            document.getElementById(`q${qNumber}`).classList.add('hidden');
+            document.getElementById(`q${qNumber + 1}`).classList.remove('hidden');
+        }
+
+        function finishQuiz() {
+            document.getElementById('quiz-section').style.display = 'none';
+            const footer = document.getElementById('final-footer');
+            footer.classList.remove('hidden');
+            // Scroll to footer
+            footer.scrollIntoView({ behavior: 'smooth' });
+            // Confetti for passing quiz
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+
+        // VENDING MACHINE
+        function dispense(type) {
+            const screen = document.getElementById('vending-display');
+            screen.innerHTML = "DISPENSING...";
+            screen.classList.add('text-pink-500');
+            setTimeout(() => {
+                screen.classList.remove('text-pink-500');
+                if(type === 'hug') screen.innerHTML = "🤗 SENT: One Tight Virtual Hug!";
+                else if (type === 'joke') screen.innerHTML = "😂 I used to hide my farts from you, lol. ";
+                else if (type === 'fact') screen.innerHTML = "💡 Fact: I'm your muffin.";
+                else if (type === 'comp') screen.innerHTML = "✨ You're a very pretty girl, you're simply amazing, like I wonder how can someone be this amazing";
+                else if (type === 'future') screen.innerHTML = "✈️ We'll decide it, it's in our hands.";
+                else if (type === 'love') screen.innerHTML = "❤️ I love you, I love everything about you, miss you";
+            }, 800);
+        }
+
+        // MAP BRIDGE
+        function bridgeGap() {
+            const plane = document.getElementById('plane-icon');
+            const status = document.getElementById('bridge-status');
+            plane.style.left = "90%";
+            status.style.opacity = "1";
+            status.innerHTML = "Status: CALCULATING...";
+            setTimeout(() => {
+                status.innerHTML = "Status: CONNECTED ❤️";
+                confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+            }, 3000);
+        }
+
+        // RUNAWAY BUTTON
+        function dodge() {
+            const btn = document.getElementById('no-btn');
+            const x = (Math.random() - 0.5) * 400; 
+            const y = (Math.random() - 0.5) * 400;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        // YES BUTTON
+        function acceptLove() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff0000', '#ff69b4'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff0000', '#ff69b4'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+
+            const questionDiv = document.getElementById('final-question');
+            const letterDiv = document.getElementById('secret-letter');
+            questionDiv.style.display = 'none';
+            letterDiv.classList.remove('hidden');
+            setTimeout(() => {
+                letterDiv.style.opacity = '1';
+                letterDiv.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // MUSIC
+        let isPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            if (isPlaying) music.pause();
+            else music.play();
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+</html>
