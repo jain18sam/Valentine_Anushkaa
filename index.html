@@ -95,7 +95,7 @@
         <div class="max-w-2xl p-8 w-full">
             <div id="terminal-content" class="text-lg md:text-xl leading-relaxed text-pink-500"></div>
             <button id="enter-btn" onclick="enterSite()" class="hidden mt-6 border border-pink-500 text-pink-500 px-6 py-2 hover:bg-pink-600 hover:text-white transition uppercase tracking-widest font-bold">
-                >> Access_Heart.exe
+                >> please enter.exe
             </button>
         </div>
     </div>
@@ -108,7 +108,7 @@
                     <img src="main-photo.jpg" alt="Anushkaa" class="w-full h-full object-cover">
                 </div>
                 <h1 class="script-font text-7xl md:text-9xl mb-4 text-rose-600 drop-shadow-sm">Anushkaa</h1>
-                <p class="text-2xl md:text-3xl font-light italic text-rose-800">"In a world of variables, you are my only constant."</p>
+                <p class="text-2xl md:text-3xl font-light italic text-rose-800">"In a world full of variables, you are my only constant."</p>
             </div>
             <div class="mt-12 animate-bounce text-rose-600">
                 <i class="fas fa-chevron-down text-4xl drop-shadow-md"></i>
@@ -183,10 +183,10 @@
 
         <section class="py-20 container mx-auto px-4">
             <div class="glass max-w-4xl mx-auto p-10 border-t-8 border-rose-500 bg-white/70">
-                <h2 class="text-4xl font-bold text-center mb-2 text-rose-800">Emotional Vending Machine</h2>
+                <h2 class="text-4xl font-bold text-center mb-2 text-rose-800">Whatever you may choose</h2>
                 <p class="text-center mb-8 text-rose-500">Select what you need, my love.</p>
                 <div class="lcd-screen p-6 rounded-lg mb-8 text-center min-h-[100px] flex items-center justify-center text-xl border-4 border-gray-800 shadow-inner">
-                    <span id="vending-display">STATUS: READY TO LOVE</span>
+                    <span id="vending-display">All yours</span>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <button onclick="dispense('hug')" class="bg-rose-500 hover:bg-rose-600 text-white py-4 rounded-xl shadow-lg font-bold transition transform active:scale-95">Big Hug</button>
@@ -360,8 +360,8 @@
         const terminalText = [
             "> Initializing Valentine_Protocol...",
             "> Searching for User: Anushkaaaaa...",
-            "> Match Found: 100%",
-            "> Status: Missing You, in critical state.",
+            "> Match Found: 100% sure",
+            "> Status: Missing You, crying right now
             "> Access Granted."
         ];
         
@@ -415,7 +415,7 @@
         // VENDING MACHINE
         function dispense(type) {
             const screen = document.getElementById('vending-display');
-            screen.innerHTML = "DISPENSING...";
+            screen.innerHTML = "wait for a sec, love...";
             screen.classList.add('text-pink-500');
             setTimeout(() => {
                 screen.classList.remove('text-pink-500');
@@ -434,9 +434,9 @@
             const status = document.getElementById('bridge-status');
             plane.style.left = "90%";
             status.style.opacity = "1";
-            status.innerHTML = "Status: CALCULATING...";
+            status.innerHTML = "This is how I'll run towards you...";
             setTimeout(() => {
-                status.innerHTML = "Status: CONNECTED ❤️";
+                status.innerHTML = "yayyyyy ❤️";
                 confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
             }, 3000);
         }
